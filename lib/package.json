@@ -1,0 +1,38 @@
+{
+  "name": "@watch-state/react-router",
+  "version": "1.0.0",
+  "description": "Browser History API with watch-state and React",
+  "main": "index.js",
+  "module": "index.es6.js",
+  "jsnext:main": "index.es6.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d8corp/watch-state-react-router.git"
+  },
+  "keywords": [
+    "history",
+    "History api",
+    "routing",
+    "router",
+    "route",
+    "react",
+    "watch",
+    "state",
+    "url",
+    "front-end"
+  ],
+  "author": "Mikhail Lysikov <d8corp@mail.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d8corp/watch-state-react-router/issues"
+  },
+  "homepage": "https://github.com/d8corp/watch-state-react-router",
+  "dependencies": {
+    "watch-state": ">=1.0.2",
+    "@watch-state/history-api": ">=1.0.1",
+    "@watch-state/react": ">=1",
+    "react": ">=16.8",
+    "tslib": ">=2"
+  }
+}
