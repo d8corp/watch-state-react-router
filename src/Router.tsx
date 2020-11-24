@@ -1,5 +1,5 @@
 import React, {Component, ReactNode, createContext} from 'react'
-import watch, {event, cache, state, Watch, unwatch} from '@watch-state/react'
+import watch, {event, cache, state, Watch, mixer} from '@watch-state/react'
 import History from '@watch-state/history-api'
 
 const history = new History()
@@ -61,13 +61,9 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
     this.unmount = false
     this.reaction = new Watch(() => {
       if (this.matched) {
-        unwatch(() => {
-          this.onShow()
-        })
+        this.onShow()
       } else {
-        unwatch(() => {
-          this.onHide()
-        })
+        this.onHide()
       }
     })
   }
@@ -117,7 +113,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
   @cache get showOther (): boolean {
     return !this.childRouterCount
   }
-  @cache get matched (): boolean {
+  @mixer get matched (): boolean {
     const {props} = this
     if (props.other && !this.context?.showOther) {
       return false
@@ -127,7 +123,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
     }
     return history.is(this.matchReg)
   }
-  @cache get matchReg (): string {
+  @mixer get matchReg (): string {
     return getMatchReg(this.props)
   }
 

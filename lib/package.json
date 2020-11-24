@@ -1,6 +1,6 @@
 {
   "name": "@watch-state/react-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browser History API with watch-state and React",
   "main": "index.js",
   "module": "index.es6.js",
@@ -29,9 +29,8 @@
   },
   "homepage": "https://github.com/d8corp/watch-state-react-router",
   "dependencies": {
-    "watch-state": ">=1.0.2",
     "@watch-state/history-api": ">=1.0.1",
-    "@watch-state/react": ">=1",
+    "@watch-state/react": ">=1.0.1",
     "react": ">=16.8",
     "tslib": ">=2"
   }
