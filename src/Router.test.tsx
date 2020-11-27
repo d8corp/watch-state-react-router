@@ -1,6 +1,7 @@
 import ReactDom from 'react-dom'
-import React, {ReactElement} from 'react'
+import React, {Component, ReactElement} from 'react'
 import Router, {history} from '.'
+import watch, {State} from '@watch-state/react'
 
 function render (component: ReactElement): HTMLDivElement {
   const div = document.createElement('div')
@@ -660,6 +661,30 @@ describe('Router', () => {
 
       history.push('/test1')
 
+      expect(div.innerHTML).toBe('')
+    })
+    test('rerender up', () => {
+      history.push('/')
+
+      const show = new State(0)
+
+      @watch
+      class Test extends Component {
+        render () {
+          return show.value ? <Router path='/'>home</Router> : null
+        }
+      }
+      const div = render(<Test />)
+
+      expect(div.innerHTML).toBe('')
+
+      show.value++
+      expect(div.innerHTML).toBe('home')
+
+      show.value++
+      expect(div.innerHTML).toBe('home')
+
+      history.push('/menu')
       expect(div.innerHTML).toBe('')
     })
   })

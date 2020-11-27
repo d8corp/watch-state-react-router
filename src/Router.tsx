@@ -1,5 +1,5 @@
 import React, {Component, ReactNode, createContext} from 'react'
-import watch, {event, cache, state, Watch, mixer} from '@watch-state/react'
+import watch, {event, cache, state, Watch, mixer, unwatch} from '@watch-state/react'
 import History from '@watch-state/history-api'
 
 const history = new History()
@@ -59,12 +59,14 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
 
   componentDidMount () {
     this.unmount = false
-    this.reaction = new Watch(() => {
-      if (this.matched) {
-        this.onShow()
-      } else {
-        this.onHide()
-      }
+    unwatch(() => {
+      this.reaction = new Watch(() => {
+        if (this.matched) {
+          this.onShow()
+        } else {
+          this.onHide()
+        }
+      })
     })
   }
   componentWillUnmount () {
