@@ -1,5 +1,5 @@
 import React, {Component, ReactNode, createContext} from 'react'
-import watch, {event, cache, state, Watch, mixer, unwatch} from '@watch-state/react'
+import watch, {event, cache, state, Watch, mixer, unwatch, WATCHER, stateValues, State} from '@watch-state/react'
 import History from '@watch-state/history-api'
 
 const history = new History()
@@ -74,7 +74,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
       this.unmount = true
       this.onHide()
     }
-    this.reaction.destructor()
+    this.reaction?.destructor()
   }
 
   get children () {
@@ -110,10 +110,10 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
 
   unmount = false
   @state show = false
-  @state childRouterCount = 0
+  @state childRouters: Set<Router> = new Set()
 
   @cache get showOther (): boolean {
-    return !this.childRouterCount
+    return !this.childRouters.size
   }
   @mixer get matched (): boolean {
     const {props} = this
@@ -144,7 +144,13 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
   @event onShown () {
     const {onShown} = this.props
     if (!this.show && !this.props.other && this.context) {
-      this.context.childRouterCount++
+      const childRouters: Set<Router> = this.context.childRouters
+      if (!childRouters.size) {
+        childRouters.add(this);
+        (stateValues(this.context).childRouters as State).update()
+      } else {
+        childRouters.add(this)
+      }
     }
     this.show = true
     if (onShown) {
@@ -152,6 +158,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
     }
   }
   @event onHide () {
+    this.childDestructor()
     const {onHide, hideDelay, delay} = this.props
     if (onHide) {
       onHide()
@@ -165,12 +172,24 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
   }
   @event onHidden () {
     if (this.show && !this.props.other && this.context) {
-      this.context.childRouterCount--
+      const childRouters: Set<Router> = this.context.childRouters
+      childRouters.delete(this)
+      if (!childRouters.size) {
+        (stateValues(this.context).childRouters as State).update()
+      }
     }
     this.show = false
     if (this.props.onHidden) {
       this.props.onHidden()
     }
+  }
+  @event childDestructor () {
+    this.childRouters.forEach(router => router.destructor())
+  }
+  @event destructor () {
+    this.childDestructor()
+    this[WATCHER]?.destructor()
+    this.reaction.destructor()
   }
 
   render () {

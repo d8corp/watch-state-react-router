@@ -52,7 +52,7 @@ declare class Router<P extends RouterProps = RouterProps, C = any> extends Compo
     get children(): any;
     unmount: boolean;
     show: boolean;
-    childRouterCount: number;
+    childRouters: Set<Router>;
     get showOther(): boolean;
     get matched(): boolean;
     get matchReg(): string;
@@ -60,6 +60,8 @@ declare class Router<P extends RouterProps = RouterProps, C = any> extends Compo
     onShown(): void;
     onHide(): void;
     onHidden(): void;
+    childDestructor(): void;
+    destructor(): void;
     render(): JSX.Element;
 }
 export default Router;
