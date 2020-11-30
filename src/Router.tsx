@@ -134,15 +134,6 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
     if (onShow) {
       onShow()
     }
-    if (showDelay || delay) {
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => this.onShown(), showDelay || delay)
-    } else {
-      this.onShown()
-    }
-  }
-  @event onShown () {
-    const {onShown} = this.props
     if (!this.show && !this.props.other && this.context) {
       const childRouters: Set<Router> = this.context.childRouters
       if (!childRouters.size) {
@@ -152,6 +143,15 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
         childRouters.add(this)
       }
     }
+    if (showDelay || delay) {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => this.onShown(), showDelay || delay)
+    } else {
+      this.onShown()
+    }
+  }
+  @event onShown () {
+    const {onShown} = this.props
     this.show = true
     if (onShown) {
       onShown()
