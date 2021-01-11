@@ -1,5 +1,5 @@
 import React, {Component, ReactNode, createContext} from 'react'
-import watch, {event, cache, state, Watch, mixer, unwatch, WATCHER, stateValues, State} from '@watch-state/react'
+import watch, {event, cache, state, Watch, mixer, unwatch, WATCHER, getState} from '@watch-state/react'
 import History from '@watch-state/history-api'
 
 const history = new History()
@@ -138,7 +138,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
       const childRouters: Set<Router> = this.context.childRouters
       if (!childRouters.size) {
         childRouters.add(this);
-        (stateValues(this.context).childRouters as State).update()
+        getState(this.context, 'childRouters').update()
       } else {
         childRouters.add(this)
       }
@@ -175,7 +175,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
       const childRouters: Set<Router> = this.context.childRouters
       childRouters.delete(this)
       if (!childRouters.size) {
-        (stateValues(this.context).childRouters as State).update()
+        getState(this.context, 'childRouters').update()
       }
     }
     this.show = false
