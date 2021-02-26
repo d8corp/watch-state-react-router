@@ -7,6 +7,7 @@ interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
     scrollTo?: number | string;
     children?: ReactNode;
     onMove?: (move: () => void) => any;
+    disabled?: boolean;
 }
 declare const LinkDefaultProps: {
     href: string;

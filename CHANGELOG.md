@@ -1,5 +1,7 @@
 # Changelog
 ## v1.1
+### v1.1.1 [![01.12.2020](https://img.shields.io/date/1614355520)](https://github.com/d8corp/watch-state-react-router/tree/v1.1.1)
+- added disabled prop to `Link` component
 ### v1.1.0 [![01.12.2020](https://img.shields.io/date/1610395059)](https://github.com/d8corp/watch-state-react-router/tree/v1.1.0)
 - updated `watch-state` to the second version
 ## v1.0
