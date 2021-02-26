@@ -10,6 +10,7 @@ interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
   scrollTo?: number | string
   children?: ReactNode
   onMove?: (move: () => void) => any
+  disabled?: boolean
 }
 
 const LinkDefaultProps = {
@@ -24,11 +25,13 @@ class Link <P extends LinkProps = LinkProps, C = any> extends Component<LinkProp
     history[replace ? 'replace' : 'push'](url, scrollTo, scrollFirst)
   }
   onMove (url: string) {
-    const {onMove} = this.props
-    if (onMove) {
-      onMove(() => this.move(url))
-    } else {
-      this.move(url)
+    const {onMove, disabled} = this.props
+    if (!disabled) {
+      if (onMove) {
+        onMove(() => this.move(url))
+      } else {
+        this.move(url)
+      }
     }
   }
   onClick (e) {

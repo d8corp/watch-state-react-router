@@ -117,4 +117,14 @@ describe('Link', () => {
     const link = shallow(<Link href='tel:+79998887766'>test</Link>)
     expect(link.html()).toBe('<a href="tel:+79998887766">test</a>')
   })
+  test('disabled', async () => {
+    history.locale = ''
+    history.replace('/')
+
+    const link = shallow(<Link disabled href='/test'>test</Link>)
+
+    link.simulate('click')
+
+    expect(history.url).toBe('/')
+  })
 })
