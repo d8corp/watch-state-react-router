@@ -165,7 +165,11 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
     }
     if ((hideDelay || delay) && !this.unmount) {
       clearTimeout(this.timer)
-      this.timer = setTimeout(() => this.onHidden(), hideDelay || delay)
+      this.timer = setTimeout(() => {
+        if (!this.matched) {
+          this.onHidden()
+        }
+      }, hideDelay || delay)
     } else {
       this.onHidden()
     }

@@ -687,5 +687,35 @@ describe('Router', () => {
       history.push('/menu')
       expect(div.innerHTML).toBe('')
     })
+    test('delay push', async () => {
+      history.push('/')
+
+      const div = render(
+        <>
+          <Router hideDelay={100} path='/1'>1</Router>
+          <Router hideDelay={100} path='/2'>2</Router>
+        </>
+      )
+
+      expect(div.innerHTML).toBe('')
+
+      history.push('/1')
+
+      expect(div.innerHTML).toBe('1')
+
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(history.url).toBe('/1')
+      expect(div.innerHTML).toBe('1')
+
+      history.push('/2')
+      history.push('/1')
+
+      expect(div.innerHTML).toBe('12')
+
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(div.innerHTML).toBe('1')
+    })
   })
 })
