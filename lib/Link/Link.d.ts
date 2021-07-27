@@ -1,5 +1,5 @@
 import { AnchorHTMLAttributes, Component, ReactNode } from 'react';
-interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
+export interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
     activeClass?: string;
     exact?: boolean;
     replace?: boolean;
@@ -9,10 +9,10 @@ interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
     onMove?: (move: () => void) => any;
     disabled?: boolean;
 }
-declare const LinkDefaultProps: {
+export declare const LinkDefaultProps: {
     href: string;
 };
-declare class Link<P extends LinkProps = LinkProps, C = any> extends Component<LinkProps, C> {
+export declare class Link<P extends LinkProps = LinkProps, C = any> extends Component<LinkProps, C> {
     static defaultProps: {
         href: string;
     };
@@ -24,5 +24,3 @@ declare class Link<P extends LinkProps = LinkProps, C = any> extends Component<L
     get className(): string;
     render(): JSX.Element;
 }
-export default Link;
-export { Link, LinkProps, LinkDefaultProps, };

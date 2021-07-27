@@ -1,8 +1,8 @@
 import React, {AnchorHTMLAttributes, Component, ReactNode} from 'react'
-import {history} from './Router'
+import {history} from '../Router'
 import watch, {event} from '@watch-state/react'
 
-interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
+export interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
   activeClass?: string
   exact?: boolean
   replace?: boolean
@@ -13,12 +13,12 @@ interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
   disabled?: boolean
 }
 
-const LinkDefaultProps = {
+export const LinkDefaultProps = {
   href: '/',
 }
 
 @watch
-class Link <P extends LinkProps = LinkProps, C = any> extends Component<LinkProps, C> {
+export class Link <P extends LinkProps = LinkProps, C = any> extends Component<LinkProps, C> {
   static defaultProps = LinkDefaultProps
   @event move (url) {
     const {scrollTo, scrollFirst, replace} = this.props
@@ -102,12 +102,4 @@ class Link <P extends LinkProps = LinkProps, C = any> extends Component<LinkProp
       className={this.className}
     />
   }
-}
-
-export default Link
-
-export {
-  Link,
-  LinkProps,
-  LinkDefaultProps,
 }

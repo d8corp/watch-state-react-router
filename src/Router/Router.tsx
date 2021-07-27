@@ -1,12 +1,13 @@
 import React, {Component, ReactNode, createContext} from 'react'
-import watch, {event, cache, state, Watch, mixer, unwatch, WATCHER, getState} from '@watch-state/react'
+import {Watch} from 'watch-state'
+import watch, {event, cache, state, mixer, WATCHER, getState} from '@watch-state/react'
 import History from '@watch-state/history-api'
 
-const history = new History()
+export const history = new History()
 
-const RouterContext = createContext<Router>(null)
+export const RouterContext = createContext<Router>(null)
 
-interface RouterProps {
+export interface RouterProps {
   match?: string
   path?: string
   search?: string
@@ -26,7 +27,7 @@ interface RouterProps {
   children?: ((get: (id?: number, defaultValue?: string) => string) => ReactNode) | ReactNode
 }
 
-const RouterDefaultProps = {
+export const RouterDefaultProps = {
   match: '',
   path: '',
   search: '',
@@ -37,7 +38,7 @@ const RouterDefaultProps = {
   hashIsh: false
 }
 
-function getMatchReg (props: RouterProps) {
+export function getMatchReg (props: RouterProps) {
   const {match} = props
   if (match) {
     return match
@@ -50,7 +51,7 @@ function getMatchReg (props: RouterProps) {
 }
 
 @watch
-class Router <P extends RouterProps = RouterProps, C = any> extends Component<P, C> {
+export class Router <P extends RouterProps = RouterProps, C = any> extends Component<P, C> {
   static defaultProps = RouterDefaultProps
   static contextType = RouterContext
 
@@ -59,22 +60,21 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
 
   componentDidMount () {
     this.unmount = false
-    unwatch(() => {
-      this.reaction = new Watch(() => {
-        if (this.matched) {
-          this.onShow()
-        } else {
-          this.onHide()
-        }
-      })
-    })
+    this.reaction = new Watch(() => {
+      if (this.matched) {
+        this.onShow()
+      } else {
+        this.onHide()
+      }
+    }, true)
   }
+
   componentWillUnmount () {
     if (this.show) {
       this.unmount = true
       this.onHide()
     }
-    this.reaction?.destructor()
+    this.reaction?.destroy()
   }
 
   get children () {
@@ -193,7 +193,7 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
   @event destructor () {
     this.childDestructor()
     this[WATCHER]?.destructor()
-    this.reaction.destructor()
+    this.reaction.destroy()
   }
 
   render () {
@@ -206,12 +206,3 @@ class Router <P extends RouterProps = RouterProps, C = any> extends Component<P,
 }
 
 export default Router
-
-export {
-  Router,
-  history,
-  RouterContext,
-  RouterProps,
-  RouterDefaultProps,
-  getMatchReg
-}

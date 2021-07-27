@@ -1,6 +1,6 @@
 import ReactDom from 'react-dom'
 import React, {ReactElement} from 'react'
-import Router, {history, Redirect} from '.'
+import Router, {history, Redirect} from '../index'
 
 function render (component: ReactElement): HTMLDivElement {
   const div = document.createElement('div')

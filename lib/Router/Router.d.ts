@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react';
-import { Watch } from '@watch-state/react';
+import { Watch } from 'watch-state';
 import History from '@watch-state/history-api';
-declare const history: History;
-declare const RouterContext: React.Context<Router<RouterProps, any>>;
-interface RouterProps {
+export declare const history: History;
+export declare const RouterContext: React.Context<Router<RouterProps, any>>;
+export interface RouterProps {
     match?: string;
     path?: string;
     search?: string;
@@ -22,7 +22,7 @@ interface RouterProps {
     onHidden?: () => void;
     children?: ((get: (id?: number, defaultValue?: string) => string) => ReactNode) | ReactNode;
 }
-declare const RouterDefaultProps: {
+export declare const RouterDefaultProps: {
     match: string;
     path: string;
     search: string;
@@ -32,8 +32,8 @@ declare const RouterDefaultProps: {
     searchIsh: boolean;
     hashIsh: boolean;
 };
-declare function getMatchReg(props: RouterProps): string;
-declare class Router<P extends RouterProps = RouterProps, C = any> extends Component<P, C> {
+export declare function getMatchReg(props: RouterProps): string;
+export declare class Router<P extends RouterProps = RouterProps, C = any> extends Component<P, C> {
     static defaultProps: {
         match: string;
         path: string;
@@ -65,4 +65,3 @@ declare class Router<P extends RouterProps = RouterProps, C = any> extends Compo
     render(): JSX.Element;
 }
 export default Router;
-export { Router, history, RouterContext, RouterProps, RouterDefaultProps, getMatchReg };

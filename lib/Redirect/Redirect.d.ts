@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react';
-interface RedirectData {
+export interface RedirectData {
     path: string;
     search: string;
     hash: string;
@@ -7,7 +7,7 @@ interface RedirectData {
     scrollFirst: boolean;
     position: string | number;
 }
-interface RedirectProps {
+export interface RedirectProps {
     url?: string;
     path?: string;
     search?: {
@@ -19,13 +19,13 @@ interface RedirectProps {
     position?: string | number;
     children?: ReactNode;
 }
-declare const RedirectDefaultProp: {
+export declare const RedirectDefaultProp: {
     url: string;
     path: string;
     hash: string;
     children: any;
 };
-declare class Redirect<P extends RedirectProps = RedirectProps, C = any> extends Component<P, C> {
+export declare class Redirect<P extends RedirectProps = RedirectProps, C = any> extends Component<P, C> {
     static data: RedirectData;
     static defaultProps: {
         url: string;
@@ -39,5 +39,3 @@ declare class Redirect<P extends RedirectProps = RedirectProps, C = any> extends
     get data(): RedirectData;
     render(): (P["children"] & string) | (P["children"] & number) | (P["children"] & false) | (P["children"] & true) | (P["children"] & {}) | (P["children"] & import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => Component<any, any, any>)>) | (new (props: any) => Component<any, any, any>)>) | (P["children"] & import("react").ReactNodeArray) | (P["children"] & import("react").ReactPortal);
 }
-export default Redirect;
-export { Redirect, RedirectProps, RedirectDefaultProp, };

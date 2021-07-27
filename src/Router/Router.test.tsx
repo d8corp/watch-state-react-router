@@ -1,6 +1,6 @@
 import ReactDom from 'react-dom'
 import React, {Component, ReactElement} from 'react'
-import Router, {history} from '.'
+import Router, {history} from '../index'
 import watch, {State} from '@watch-state/react'
 
 function render (component: ReactElement): HTMLDivElement {
@@ -630,19 +630,19 @@ describe('Router', () => {
     test('delay', async () => {
       history.push('/test')
       const div = render(
-        <Router path='/test' delay={50}>test</Router>
+        <Router path='/test' delay={500}>test</Router>
       )
 
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await new Promise(resolve => setTimeout(resolve, 500))
 
       expect(div.innerHTML).toBe('test')
 
       history.push('/')
-      await new Promise(resolve => setTimeout(resolve, 30))
+      await new Promise(resolve => setTimeout(resolve, 300))
       history.push('/test')
 
       expect(div.innerHTML).toBe('test')
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await new Promise(resolve => setTimeout(resolve, 500))
       expect(div.innerHTML).toBe('test')
     })
     test('path', () => {

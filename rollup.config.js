@@ -1,13 +1,9 @@
 import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
+import glob from 'glob'
 
 const def = {
-  input: {
-    index: 'src/index.ts',
-    Router: 'src/Router.tsx',
-    Link: 'src/Link.tsx',
-    Redirect: 'src/Redirect.ts',
-  },
+  input: glob.sync('{src/index.ts,src/**/index.ts}'),
   external: [
     ...Object.keys(pkg.dependencies || {})
   ]
@@ -23,7 +19,8 @@ export default [{
   output: {
     dir: 'lib',
     entryFileNames: '[name]' + pkg.main.replace('index', ''),
-    format: 'cjs'
+    format: 'cjs',
+    preserveModules: true
   },
   plugins: [
     typescript({
@@ -36,7 +33,8 @@ export default [{
   output: {
     dir: 'lib',
     entryFileNames: '[name]' + pkg.module.replace('index', ''),
-    format: 'es'
+    format: 'es',
+    preserveModules: true
   },
   plugins: [
     typescript({

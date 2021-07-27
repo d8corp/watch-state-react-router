@@ -1,24 +1,40 @@
-# @watch-state/react-router
-[![NPM](https://img.shields.io/npm/v/@watch-state/react-router.svg)](https://github.com/d8corp/watch-state-react-router/blob/master/CHANGELOG.md)
-[![downloads](https://img.shields.io/npm/dm/@watch-state/react-router.svg)](https://www.npmjs.com/package/@watch-state/react-router)
+<a href="https://www.npmjs.com/package/watch-state">
+  <img src="https://raw.githubusercontent.com/d8corp/watch-state/v3.3.3/img/logo.svg" align="left" width="90" height="90" alt="Watch-State logo by Mikhail Lysikov">
+</a>
+
+# &nbsp; @watch-state/react-router
+
+&nbsp;
+
+[![NPM](https://img.shields.io/npm/v/@watch-state/react-router.svg)](https://www.npmjs.com/package/@watch-state/react-router)
+[![downloads](https://img.shields.io/npm/dm/@watch-state/react-router.svg)](https://www.npmtrends.com/@watch-state/react-router)
+[![changelog](https://img.shields.io/badge/Changelog-⋮-brightgreen)](https://changelogs.xyz/@watch-state/react-router)
 [![license](https://img.shields.io/npm/l/@watch-state/react-router)](https://github.com/d8corp/watch-state-react-router/blob/master/LICENSE)  
 
 This package provides you the browser routing for:  
 - [React](https://reactjs.org/) v16.8+  
-- [watch-state](https://www.npmjs.com/package/watch-state)
+- [watch-state](https://www.npmjs.com/package/watch-state) v3+
 
-### Installation
+[![stars](https://img.shields.io/github/stars/d8corp/watch-state-react-router?style=social)](https://github.com/d8corp/watch-state-react-router/stargazers)
+[![watchers](https://img.shields.io/github/watchers/d8corp/watch-state-react-router?style=social)](https://github.com/d8corp/watch-state-react-router/watchers)
+
+
+### Install
 npm
 ```bash
 npm i @watch-state/react-router
 ```
+
 yarn
 ```bash
 yarn add @watch-state/react-router
 ```
-The simplest way of using is [Create React App](https://create-react-app.dev/).  
+
+The simplest way of using is [Create React App](https://create-react-app.dev/).
+
 ## Router
 Use `Router` anywhere to show content by URL matching.
+
 ```typescript jsx
 import Router, {history} from '@watch-state/react-router'
 // or
@@ -41,37 +57,49 @@ const App = () => (
   </div>
 )
 ```
+
 The `history` is [@watch-state/history-api](https://www.npmjs.com/package/@watch-state/history-api).
+
 ### path ![string](https://img.shields.io/badge/-string-green)
 Use `path` to show router content by URL path
+
 ```typescript jsx
 const Test = () => <Router path='/test'>test</Router>
 ```
+
 > `test` will be shown when url equals `/test` or `/test?key=value#test` but not for `/test/420` or `/user/test`.
 
 You can use it as regexp.
+
 ```typescript jsx
 const Test = () => <Router path='/(foo|bar)'>test</Router>
 ```
+
 > `test` will be shown when url path equals `/foo` or `/bar`.  
 
 You can get `foo` or `bar` by children function
+
 ```typescript jsx
 const Test = () => <Router path='/(foo|bar)'>{get => get(1)}</Router>
 ```
+
 > `/foo` returns `foo` and `/bar` returns `bar`.
 
 The number in the `get` function says which brackets you want to use.
+
 ```typescript jsx
 const Test = () => <Router path='/(foo|bar)/(\d+)'>{get => get(2)}</Router>
 ```
+
 > `/foo/13` returns `13` and `/bar/420` returns `420`.
 
 ### match ![string](https://img.shields.io/badge/-string-green)
 Use `match` if you want to match URL by custom regexp
+
 ```typescript jsx
 const Test = () => <Router match='^/(foo|bar)'>FOOBAR</Router>
 ```
+
 > `/foo/13` returns `FOOBAR` and `/bar` returns `FOOBAR`.
 
 If you use `match` then `path`, `search`, `hash`, `ish`, `pathIsh`, `searchIsh` and `hashIsh` are not be used.  
@@ -79,9 +107,11 @@ You can use a function as a child to get the value of the matching like for `pat
 
 ### pathIsh ![boolean](https://img.shields.io/badge/-boolean-orange)
 Use `pathIsh` to make the soft routing by path. That means the path should start with `path` property.
+
 ```typescript jsx
 const Test = () => <Router path='/(foo|bar)' pathIsh>FOOBAR</Router>
 ```
+
 > `/foo/13` returns `FOOBAR` and `/bar/420/test?key=value#test` returns `FOOBAR`.  
 > Starts with `/foo` or `/bar`.
 
@@ -94,40 +124,51 @@ const Test = () => <Router path='/(foo|bar)' ish>FOOBAR</Router>
 
 ### search ![string](https://img.shields.io/badge/-string-green)
 Use `search` if you want to show content by search query of URL.
+
 ```typescript jsx
 const Test = () => <Router search='key=value'>test</Router>
 ```
+
 > `/foo/13?key=value#420` returns `test` but `/foo/13?key=value&test` returns empty content.
 
 ### searchIsh ![boolean](https://img.shields.io/badge/-boolean-orange)
 Use `searchIsh` or `ish` to make a soft search.
+
 ```typescript jsx
 const Test = () => <Router search='key=value' ish>test</Router>
 ```
+
 > now `/foo/13?key=value&test` and `/foo/13?test=1&key=value&foo=bar` returns `test`.
 
 Also, you can use only key for search
+
 ```typescript jsx
 const Test = () => <Router search='key' ish>test</Router>
 ```
+
 > `/?key&value` and `/?value&key` returns `test` but `/?key=1` and `/?key1` returns nothing.
 
 ### hash ![string](https://img.shields.io/badge/-string-green)
 Use `hash` if you want to show content by hash of URL.
+
 ```typescript jsx
 const Test = () => <Router hash='test'>test</Router>
 ```
+
 > `/any/path?any=search#test` returns `test` but `/#test1` returns empty content.
 
 ### hashIsh ![boolean](https://img.shields.io/badge/-boolean-orange)
 Use `hashIsh` or `ish` to fix it.
+
 ```typescript jsx
 const Test = () => <Router hash='test' ish>test</Router>
 ```
+
 > now `/#test1` and `/#sometextwiththetestword` returns `test`.
 
 ### other ![boolean](https://img.shields.io/badge/-boolean-orange)
 This is an alternative of react `Switch`.  
+
 `Router` with `other` shows content only if all routers without `other` in the same `Router` are not matched.
  ```typescript jsx
 const Test = () => (
@@ -138,9 +179,11 @@ const Test = () => (
   </Router>
 )
  ```
+
 > will show `home` for `/`, `user` for `/user` and `other` for any other url
 
 You may use any structure inside `Router` and several `other` routers with any props.  
+
  ```typescript jsx
 const Test = () => (
   <Router>
@@ -159,29 +202,37 @@ const Test = () => (
   </Router>
 )
  ```
+
 ### showDelay ![number](https://img.shields.io/badge/-number-blue)
 You can show content of router with delay.
+
 ```typescript jsx
 const Test = () => <Router path='/test' showDelay={1000}>test</Router>
  ```
+
 > when URL became `/test` the content be not shown, `test` will be shown in a second after that.
 
 ### hideDelay ![number](https://img.shields.io/badge/-number-blue)
 This is the same `showDelay` but for hiding.
+
 ```typescript jsx
 const Test = () => <Router path='/test' hideDelay={1000}>test</Router>
  ```
+
 > when URL became `/test` the content be shown immediately, but when URL is changed after that, `test` will be hidden in a second.
 
 ### delay ![number](https://img.shields.io/badge/-number-blue)
 This is the combine of `showDelay` and `hideDelay`.
+
 ```typescript jsx
 const Test = () => <Router path='/test' delay={1000}>test</Router>
 ```
+
 > `test` will be shown or hidden in a second.
 
 ### onShow ![function-void](https://img.shields.io/badge/function-void-orange)
 It calls any time when the content will be shown
+
 ```typescript jsx
 const Test = () => (
   <Router
@@ -194,6 +245,7 @@ const Test = () => (
 
 ### onShown ![function-void](https://img.shields.io/badge/function-void-orange)
 It calls any time when the content has shown
+
 ```typescript jsx
 const Test = () => (
   <Router
@@ -207,6 +259,7 @@ const Test = () => (
 
 ### onHide ![function-void](https://img.shields.io/badge/function-void-orange)
 It calls any time when the content will be hidden
+
 ```typescript jsx
 const Test = () => (
   <Router
@@ -219,6 +272,7 @@ const Test = () => (
 
 ### onHidden ![function-void](https://img.shields.io/badge/function-void-orange)
 It calls any time when the content has hidden
+
 ```typescript jsx
 const Test = () => (
   <Router
@@ -229,13 +283,17 @@ const Test = () => (
   </Router>
 )
 ```
+
 ## Redirect
 Use the component for comfortable redirection
+
 ```javascript
 import {Redirect} from '@watch-state/react-router'
 ```
+
 ### url ![string](https://img.shields.io/badge/-string-green)
 Use the prop to redirect at the url.
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect url='/' />
@@ -253,36 +311,46 @@ const RedirectToRepo = () => (
   <Redirect url='https://github.com/d8corp/watch-state-react-router' />
 )
 ```
+
 ### path ![string](https://img.shields.io/badge/-string-green)
 The same as `url` but works only with path.
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect path='/' />
 )
 ```
+
 You may combine with `url`
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect url='/foo#bar' path='/' />
 )
 // redirects to /#bar
 ```
+
 ### search ![string](https://img.shields.io/badge/-string-green) ![object](https://img.shields.io/badge/-object-orange)
 The same as `path` but works with search and you may combine with `url`
+
 ```typescript jsx
 const RedirectToLoginModal = () => (
   <Redirect search='modal=login' />
 )
 // redirects to ?modal=login
 ```
+
 You may use an object of search keys and values
+
 ```typescript jsx
 const RedirectToLoginModal = () => (
   <Redirect search={{modal: 'login'}} />
 )
 // redirects to ?modal=login
 ```
+
 `undefined` value removes the key
+
 ```typescript jsx
 history.push('/test?key=value')
 
@@ -291,47 +359,62 @@ render (
 )
 // redirects to /test
 ```
+
 ### hash ![string](https://img.shields.io/badge/-string-green)
 The same as `path` but works with hash and you may combine with `url`
+
 ```typescript jsx
 const RedirectToRoot = () => (
   <Redirect hash='root' />
 )
 // redirects to #root
 ```
+
 ### push ![boolean](https://img.shields.io/badge/-boolean-orange)
 By default `Redirect` replaces url. If you wanna push the redirection to history use the property.
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect path='/' push />
 )
 ```
+
 ### position ![number](https://img.shields.io/badge/-number-blue) ![string](https://img.shields.io/badge/-string-green)
 By default the page scrolls up during redirection. You may change the scroll position by the property.
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect path='/' position={60} />
 )
 ```
+
 You may scroll to any element by selector query
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect path='/' position='#root' />
 )
 ```
+
 ### scrollFirst ![boolean](https://img.shields.io/badge/-boolean-orange)
 When you use smooth scroll you can wait while the scrolling finished and then make the redirection.
+
 ```typescript jsx
 const RedirectToHome = () => (
   <Redirect path='/' scrollFirst />
 )
 ```
+
 ## Link
 Use the component instance of `a`.
+
 > `rel="noreferrer"` and `target="_blank"` are default for external links.
+
 ### href ![string](https://img.shields.io/badge/-string-green)
-If `href` starts from `/` then the `Link` will use History API.  
+If `href` starts from `/` then the `Link` will use History API.
+
 `/` is default value of `href`.
+
 ```typescript jsx
 const App = () => (
   <>
@@ -344,7 +427,9 @@ const App = () => (
   </>
 )
 ```
+
 When `href` starts from `?` the `Link` will keep the pathname and change the search and hash.
+
 ```typescript jsx
 const App = () => (
   <>
@@ -359,35 +444,47 @@ const App = () => (
   </>
 )
 ```
+
 When `href` starts from `#` the `Link` will keep the whole URL except for hash.  
+
 ### replace ![boolean](https://img.shields.io/badge/-boolean-orange)
 By default `Link` pushes to history but you may use `replace` to replace current history state.
+
 ```typescript jsx
 const Agree = () => (
   <Link replace href='?'>I agree</Link>
 )
 ```
+
 `href='?'` means clearing of search and hash
+
 ### activeClass ![string](https://img.shields.io/badge/-string-green)
 If you set `activeClass` then the link will have the class if url starts from `href`
+
 ```typescript jsx
 const Test = () => (
   <Link activeClass='active' href='/test'>test</Link>
 )
 ```
+
 When you click the link html will be equal  
+
 ```html
 <a class="active" href="/test">test</a>
 ```
+
 ### exact ![boolean](https://img.shields.io/badge/-boolean-orange)
 By default `activeClass` will be applied when url starts from `href` but use `exact` to compare exactly.
+
 ```typescript jsx
 const Test = () => (
   <Link activeClass='active' href='/test' exact>test</Link>
 )
 ```
+
 ### scrollTo ![number](https://img.shields.io/badge/-number-blue) ![string](https://img.shields.io/badge/-string-green)
 If you wanna scroll the page to custom position (by default it's up of the page) use `scrollTo`
+
 ```typescript jsx
 const To100 = () => (
   <Link scrollTo={100} href='/test'>test</Link>
@@ -397,35 +494,38 @@ const ToRoot = () => (
   <Link scrollTo='#root' href='/test'>test</Link>
 )
 ```
+
 Negative value keep the page on the same scroll position.
+
 ```typescript jsx
 const NoScroll = () => (
   <Link scrollTo={-1} href='/test'>test</Link>
 )
 ```
+
 ### scrollFirst ![boolean](https://img.shields.io/badge/-boolean-orange)
 When you use smooth scroll you can wait while the scrolling finished and then make the redirection.
+
 ```typescript jsx
 const Test = () => (
   <Link scrollFirst href='/test'>test</Link>
 )
 ```
+
 ### onMove ![function](https://img.shields.io/badge/function-void-orange)
 If you wanna wait for something before the move by the link then the property for you.
+
 ```typescript jsx
 const Test = () => (
   <Link href='/test' onMove={move => setTimeout(move, 100)}>test</Link>
 )
 ```
+
 ## links
 - [@watch-state/history-api](https://github.com/d8corp/watch-state-history-api) - routing with [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)
 - [package content](https://github.com/d8corp/watch-state-react-router/tree/master/lib)
-- [changelog](https://github.com/d8corp/watch-state-react-router/blob/master/CHANGELOG.md)
+
 ## issues
-If you find a bug, please file an issue on [GitHub](https://github.com/d8corp/watch-state-react-router/issues)  
-[![issues](https://img.shields.io/github/issues-raw/d8corp/watch-state-react-router)](https://github.com/d8corp/watch-state-react-router/issues)    
-> ---
-[![stars](https://img.shields.io/github/stars/d8corp/watch-state-react-router?style=social)](https://github.com/d8corp/watch-state-react-router/stargazers)
-[![watchers](https://img.shields.io/github/watchers/d8corp/watch-state-react-router?style=social)](https://github.com/d8corp/watch-state-react-router/watchers)
+If you find a bug, please file an issue on [GitHub](https://github.com/d8corp/watch-state-react-router/issues)
 
-
+[![issues](https://img.shields.io/github/issues-raw/d8corp/watch-state-react-router)](https://github.com/d8corp/watch-state-react-router/issues)

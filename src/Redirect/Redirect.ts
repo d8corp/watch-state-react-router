@@ -1,8 +1,8 @@
 import {Component, ReactNode} from 'react'
-import {history} from './Router'
+import {history} from '../Router'
 import {setSearch, parseUrl} from '@watch-state/history-api'
 
-interface RedirectData {
+export interface RedirectData {
   path: string
   search: string
   hash: string
@@ -11,7 +11,7 @@ interface RedirectData {
   position: string | number
 }
 
-interface RedirectProps {
+export interface RedirectProps {
   url?: string
   path?: string
   search?: {[key: string]: string | undefined} | string
@@ -22,14 +22,14 @@ interface RedirectProps {
   children?: ReactNode
 }
 
-const RedirectDefaultProp = {
+export const RedirectDefaultProp = {
   url: '',
   path: '',
   hash: '',
   children: null
 }
 
-class Redirect <P extends RedirectProps = RedirectProps, C = any> extends Component <P, C> {
+export class Redirect <P extends RedirectProps = RedirectProps, C = any> extends Component <P, C> {
   static data: RedirectData
   static defaultProps = RedirectDefaultProp
 
@@ -113,12 +113,4 @@ class Redirect <P extends RedirectProps = RedirectProps, C = any> extends Compon
     Redirect.data = this.data
     return this.props.children
   }
-}
-
-export default Redirect
-
-export {
-  Redirect,
-  RedirectProps,
-  RedirectDefaultProp,
 }
