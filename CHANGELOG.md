@@ -1,5 +1,8 @@
 # Changelog
 ## v1.2
+### v1.2.1 [![28.07.2021](https://img.shields.io/date/1627491625)](https://github.com/d8corp/watch-state-react-router/tree/v1.2.1)
+- fixed wrong typing of `Link` component
+
 ### v1.2.0 [![27.07.2021](https://img.shields.io/date/1627407410)](https://github.com/d8corp/watch-state-react-router/tree/v1.2.0)
 - migration to [@watch-state/react v1.3](https://github.com/d8corp/watch-state-react/releases/tag/v1.3.1) and [watch-state v3](https://github.com/d8corp/watch-state/releases/tag/v3.3.3)
 

@@ -18,7 +18,7 @@ export const LinkDefaultProps = {
 }
 
 @watch
-export class Link <P extends LinkProps = LinkProps, C = any> extends Component<LinkProps, C> {
+export class Link <P extends LinkProps = LinkProps, C = any> extends Component<P, C> {
   static defaultProps = LinkDefaultProps
   @event move (url) {
     const {scrollTo, scrollFirst, replace} = this.props

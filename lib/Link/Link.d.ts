@@ -12,7 +12,7 @@ export interface LinkProps<T = any> extends AnchorHTMLAttributes<T> {
 export declare const LinkDefaultProps: {
     href: string;
 };
-export declare class Link<P extends LinkProps = LinkProps, C = any> extends Component<LinkProps, C> {
+export declare class Link<P extends LinkProps = LinkProps, C = any> extends Component<P, C> {
     static defaultProps: {
         href: string;
     };
