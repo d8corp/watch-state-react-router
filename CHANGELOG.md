@@ -1,5 +1,8 @@
 # Changelog
 ## v1.2
+### v1.2.2 [![28.07.2021](https://img.shields.io/date/1627587488)](https://github.com/d8corp/watch-state-react-router/tree/v1.2.2)
+- fixed migration bug
+
 ### v1.2.1 [![28.07.2021](https://img.shields.io/date/1627491625)](https://github.com/d8corp/watch-state-react-router/tree/v1.2.1)
 - fixed wrong typing of `Link` component
 

@@ -192,7 +192,7 @@ export class Router <P extends RouterProps = RouterProps, C = any> extends Compo
   }
   @event destructor () {
     this.childDestructor()
-    this[WATCHER]?.destructor()
+    this[WATCHER]?.destroy()
     this.reaction.destroy()
   }
 

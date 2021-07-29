@@ -1,6 +1,6 @@
 {
   "name": "@watch-state/react-router",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Browser History API with watch-state and React",
   "main": "index.js",
   "module": "index.es6.js",
