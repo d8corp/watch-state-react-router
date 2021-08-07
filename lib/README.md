@@ -7,9 +7,10 @@
 &nbsp;
 
 [![NPM](https://img.shields.io/npm/v/@watch-state/react-router.svg)](https://www.npmjs.com/package/@watch-state/react-router)
+[![minzipped size](https://img.shields.io/bundlephobia/minzip/@watch-state/react-router)](https://bundlephobia.com/result?p=@watch-state/react-router)
 [![downloads](https://img.shields.io/npm/dm/@watch-state/react-router.svg)](https://www.npmtrends.com/@watch-state/react-router)
 [![changelog](https://img.shields.io/badge/Changelog-⋮-brightgreen)](https://changelogs.xyz/@watch-state/react-router)
-[![license](https://img.shields.io/npm/l/@watch-state/react-router)](https://github.com/d8corp/watch-state-react-router/blob/master/LICENSE)  
+[![license](https://img.shields.io/npm/l/@watch-state/react-router)](https://github.com/d8corp/watch-state-react-router/blob/main/LICENSE)  
 
 This package provides you the browser routing for:  
 - [React](https://reactjs.org/) v16.8+  
@@ -523,7 +524,7 @@ const Test = () => (
 
 ## links
 - [@watch-state/history-api](https://github.com/d8corp/watch-state-history-api) - routing with [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)
-- [package content](https://github.com/d8corp/watch-state-react-router/tree/master/lib)
+- [package content](https://github.com/d8corp/watch-state-react-router/tree/main/lib)
 
 ## issues
 If you find a bug, please file an issue on [GitHub](https://github.com/d8corp/watch-state-react-router/issues)

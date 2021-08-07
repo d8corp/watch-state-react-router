@@ -1,5 +1,10 @@
 # Changelog
+
 ## v1.2
+
+### v1.2.3 [![08.08.2021](https://img.shields.io/date/1628370770)](https://github.com/d8corp/watch-state-react-router/tree/v1.2.3)
+- updated dependencies
+
 ### v1.2.2 [![28.07.2021](https://img.shields.io/date/1627587488)](https://github.com/d8corp/watch-state-react-router/tree/v1.2.2)
 - fixed migration bug
 
@@ -10,6 +15,7 @@
 - migration to [@watch-state/react v1.3](https://github.com/d8corp/watch-state-react/releases/tag/v1.3.1) and [watch-state v3](https://github.com/d8corp/watch-state/releases/tag/v3.3.3)
 
 ## v1.1
+
 ### v1.1.2 [![06.03.2021](https://img.shields.io/date/1615039492)](https://github.com/d8corp/watch-state-react-router/tree/v1.1.2)
 - fixed a bug of async routing
 
@@ -20,6 +26,7 @@
 - updated `watch-state` to the second version
 
 ## v1.0
+
 ### v1.0.4 [![01.12.2020](https://img.shields.io/date/1606774379)](https://github.com/d8corp/watch-state-react-router/tree/v1.0.4)
 - fixed excess rendering of `other` router.
 
